@@ -1,7 +1,6 @@
 module Main (..) where
 
 import Html exposing (..)
-import StartApp.Simple as StartApp
 import Signal exposing (Address, message)
 import Counter
 import Button
@@ -83,11 +82,29 @@ view address model =
 
 
 -- Main
+-- main =
+--   StartApp.start
+--     { model = initialModel
+--     , update = update
+--     , view = view
+--     }
 
 
+main : Signal Html
 main =
-  StartApp.start
-    { model = initialModel
-    , update = update
-    , view = view
-    }
+  Signal.map (view actionsMailbox.address) model
+
+
+model : Signal Model
+model =
+  Signal.foldp update initialModel actions
+
+
+actionsMailbox : Signal.Mailbox Action
+actionsMailbox =
+  Signal.mailbox NoOp
+
+
+actions : Signal Action
+actions =
+  actionsMailbox.signal
