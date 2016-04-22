@@ -2,8 +2,8 @@ module Button (..) where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
-import Signal exposing (Address)
+import Html.Events exposing (..)
+import Signal exposing (Address, message)
 import Debug exposing (log)
 
 
@@ -23,7 +23,7 @@ initialModel =
 
 type Action
   = NoOp
-  | Increment
+  | Click
 
 
 
@@ -36,16 +36,18 @@ update action model =
     NoOp ->
       model
 
-    Increment ->
-      log "incrementing" model
+    Click ->
+      log "Clicked it" model
 
 
 
 -- View
 
 
-view : Address Action -> Model -> Html
-view address model =
+view : Address Action -> Model -> Signal.Message -> Html
+view address model message =
   button
-    [ type' "button", onClick address Increment ]
-    [ text "Increment it up!" ]
+    [ type' "button"
+    , on "click" targetValue (\_ -> message)
+    ]
+    [ text "Clicked it up!" ]

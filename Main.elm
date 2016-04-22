@@ -2,7 +2,7 @@ module Main (..) where
 
 import Html exposing (..)
 import StartApp.Simple as StartApp
-import Signal exposing (Address)
+import Signal exposing (Address, message)
 import Counter
 import Button
 
@@ -66,12 +66,19 @@ update action model =
 
 view : Address Action -> Model -> Html
 view address model =
-  div
-    []
-    [ text model.msg
-    , Counter.view (Signal.forwardTo address Increment) model.counter
-    , Button.view (Signal.forwardTo address Click) model.button
-    ]
+  let
+    counterAddress =
+      Signal.forwardTo address Increment
+
+    buttonAddress =
+      Signal.forwardTo address Click
+  in
+    div
+      []
+      [ text model.msg
+      , Counter.view counterAddress model.counter
+      , Button.view buttonAddress model.button
+      ]
 
 
 

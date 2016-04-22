@@ -2,6 +2,7 @@ module Counter (..) where
 
 import Html exposing (..)
 import Signal exposing (Address)
+import Debug exposing (log)
 
 
 -- Model
@@ -45,7 +46,7 @@ update action model =
         newModel =
           { model | count = newCount }
       in
-        newModel
+        log "increment" newModel
 
 
 
