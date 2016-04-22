@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Signal exposing (Address, message)
 import Debug exposing (log)
+import Mailboxes exposing (addresses)
 
 
 -- Model
@@ -48,6 +49,6 @@ view : Address Action -> Model -> Html
 view address model =
   button
     [ type' "button"
-    , onClick address Click
+    , onClick addresses.click ()
     ]
     [ text "Clicked it up!" ]
