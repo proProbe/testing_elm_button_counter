@@ -44,10 +44,10 @@ update action model =
 -- View
 
 
-view : Address Action -> Model -> Html
-view address model =
+view : Address Action -> Model -> Signal.Message -> Html
+view address model message =
   button
     [ type' "button"
-    , onClick address Click
+    , on "click" targetValue (\_ -> message)
     ]
     [ text "Clicked it up!" ]

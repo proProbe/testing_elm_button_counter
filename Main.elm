@@ -72,12 +72,15 @@ view address model =
 
     buttonAddress =
       Signal.forwardTo address Click
+
+    incrementMessage =
+      message counterAddress (Counter.Increment 1)
   in
     div
       []
       [ text model.msg
       , Counter.view counterAddress model.counter
-      , Button.view buttonAddress model.button
+      , Button.view buttonAddress model.button incrementMessage
       ]
 
 
