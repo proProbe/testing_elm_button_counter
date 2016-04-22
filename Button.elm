@@ -6,6 +6,7 @@ import Html.Events exposing (..)
 import Signal exposing (Address, message)
 import Debug exposing (log)
 import Mailboxes exposing (addresses)
+import Counter exposing (Action)
 
 
 -- Model
@@ -22,7 +23,7 @@ initialModel =
   }
 
 
-type Action
+type Actioner
   = NoOp
   | Click
 
@@ -31,7 +32,7 @@ type Action
 -- Update
 
 
-update : Action -> Model -> Model
+update : Actioner -> Model -> Model
 update action model =
   case action of
     NoOp ->
@@ -45,10 +46,10 @@ update action model =
 -- View
 
 
-view : Address Action -> Model -> Html
+view : Address Actioner -> Model -> Html
 view address model =
   button
     [ type' "button"
-    , onClick addresses.click ()
+    , onClick addresses.click
     ]
     [ text "Clicked it up!" ]

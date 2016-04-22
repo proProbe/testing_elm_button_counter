@@ -4,6 +4,7 @@ import Html exposing (..)
 import Signal exposing (Address, message)
 import Counter
 import Button
+import Mailboxes exposing (signals)
 
 
 -- Model
@@ -88,6 +89,9 @@ view address model =
 --     , update = update
 --     , view = view
 --     }
+-- port click : Signal Counter.Action
+-- port click =
+--   signals.click
 
 
 main : Signal Html

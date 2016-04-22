@@ -1,10 +1,11 @@
 module Mailboxes (..) where
 
 import Signal exposing (Address, Mailbox)
+import Counter exposing (Action(Increment))
 
 
 type alias Addresses =
-  { click : Address ()
+  { click : Address Action
   }
 
 
@@ -15,7 +16,7 @@ addresses =
 
 
 type alias Signals =
-  { click : Signal ()
+  { click : Signal Action
   }
 
 
@@ -25,6 +26,6 @@ signals =
   }
 
 
-click : Mailbox ()
+click : Mailbox Action
 click =
-  Signal.mailbox ()
+  Signal.mailbox (Increment 1)
